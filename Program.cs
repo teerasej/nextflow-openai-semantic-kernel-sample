@@ -28,3 +28,14 @@ string text = @"
 3rd Law of Thermodynamics - A perfect crystal at zero Kelvin has zero entropy.";
 
 Console.WriteLine(await summarize.InvokeAsync(text));
+
+
+string translationPrompt = @"{{$input}}
+
+Translate the text to math.";
+
+var translator = kernel.CreateSemanticFunction(translationPrompt);
+
+var output = await kernel.RunAsync(text, translator, summarize);
+
+Console.WriteLine(output);
